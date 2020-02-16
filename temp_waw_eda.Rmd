@@ -15,6 +15,7 @@ library(dplyr)
 library(naniar)
 library(lubridate)
 library(ggplot2)
+devtools::load_all()
 ```
 # Load data
 
@@ -64,7 +65,7 @@ colnames(temp) <- c("year", "month", "day", "hour", "air_temp")
 # Explore data
 ## Missing values
 naniar package is nice for missing data visualization. 
-```{r echo=FALSE, fig.height=3.5, fig.width=5, eval=TRUE}
+```{r echo=FALSE, fig.height=3.5, fig.width=5, eval=FALSE}
 naniar::vis_miss(temp)
 ```
 And this is great as we have a complete data set! Let's explore it further.
@@ -137,13 +138,22 @@ temp_season_median %>%
   labs(y = "median air_temp")+
   theme_light()
 ```
-Yep, the median temperature of all the seasons generally increases in time. Here is the plot with all data points for reference:
-```{r echo=FALSE}
-temp_season %>% 
+Yep, the median temperature of all the seasons generally increases in time. Here is the plot with all data points for reference and a boxplot:
+```{r echo=FALSE, fig.height=6.5, fig.width=11, fig.align="left"}
+p1 <- temp_season %>% 
   ggplot(aes(x=year, y = air_temp, color = season))+
   geom_jitter(shape = 21, alpha = .1)+
   geom_smooth(method = "lm")+
   theme_light()
+
+p2 <- temp_season %>% 
+  ggplot(aes(x=as.factor(season), y = air_temp))+
+  geom_boxplot(aes(fill = as.factor(year)), outlier.shape = 21, outlier.alpha = .1)+
+  theme_light()+
+  facet_wrap(~season, scales = "free")+
+  labs(y = "air_temp", x = "season", fill = "year")
+
+weather::multiplot(p1, p2, cols=2)
 ```
 
 ## Compare trends (seasons)

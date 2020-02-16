@@ -18,7 +18,9 @@ Explore data
 Missing values
 --------------
 
-naniar package is nice for missing data visualization. <img src="temp_waw_eda_files/figure-markdown_github/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /> And this is great as we have a complete data set! Let's explore it further.
+naniar package is nice for missing data visualization.
+
+And this is great as we have a complete data set! Let's explore it further.
 
 Temperature values distribution
 -------------------------------
@@ -30,7 +32,11 @@ Temperature values distribution
 Trend analysis (seasons)
 ------------------------
 
-It's difficult to see the trend on the charts above. Let's plot median values for each season each year: <img src="temp_waw_eda_files/figure-markdown_github/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /> Yep, the median temperature of all the seasons generally increases in time. Here is the plot with all data points for reference: <img src="temp_waw_eda_files/figure-markdown_github/unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+It's difficult to see the trend on the charts above. Let's plot median values for each season each year: <img src="temp_waw_eda_files/figure-markdown_github/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /> Yep, the median temperature of all the seasons generally increases in time. Here is the plot with all data points for reference and a boxplot:
+
+    ## Loading required package: grid
+
+<img src="temp_waw_eda_files/figure-markdown_github/unnamed-chunk-10-1.png" style="display: block; margin: auto auto auto 0;" />
 
 Compare trends (seasons)
 ------------------------
