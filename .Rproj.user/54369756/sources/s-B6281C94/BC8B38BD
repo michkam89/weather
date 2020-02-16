@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1581868152860.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "BC8B38BD",
+    "lastKnownWriteTime" : 1581869542,
+    "last_content_update" : 1581869542245,
+    "path" : "F:/programowanie/weather/temp_waw_eda.Rmd",
+    "project_path" : "temp_waw_eda.Rmd",
+    "properties" : {
+        "cursorPosition" : "7,34",
+        "last_setup_crc32" : "",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

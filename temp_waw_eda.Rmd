@@ -1,0 +1,168 @@
+---
+title: "Temperature changes in Warsaw 2004-2019"
+output: github_document
+
+---
+
+```{r setup, include=FALSE, }
+knitr::opts_chunk$set(echo = FALSE, fig.height=7.5, fig.width=10,
+                      fig.align = 'center')
+```
+```{r message=FALSE}
+# Load packages
+library(data.table)
+library(dplyr)
+library(naniar)
+library(lubridate)
+library(ggplot2)
+```
+# Load data
+
+Data was downloaded manually from <https://dane.imgw.pl/> and I stored them in 
+'data-raw' folder.
+
+```{r message=FALSE}
+# specify location
+path <- './data-raw/'
+
+# function for batch .csv upload
+do.call_rbind_fread <- function(path, pattern = "*.csv") {
+  files = list.files(path, pattern, full.names = TRUE)
+  do.call(rbind, lapply(files, function(x) fread(x, stringsAsFactors = FALSE)))
+}
+
+x <- do.call_rbind_fread(path)
+dim(x)
+```
+The dataset contained over 140000 rows and 107 columns. Unfortunately tables did not contain column names, so I needed to enter them manually ( I will skip that ugly part).
+```{r message=FALSE, include=FALSE}
+colnames <- c('Kod stacji','Nazwa stacji', 'Rok', 'Miesiac', 'Dzien', 'Godzina', 'Wysokosc podstawy chmur CL CM szyfrowana','Status pomiaru HPOD', 'Wysokosc podstawy nizszej', 'Status pomiaru HPON', 'Wysokosc podstawy wyzszej', 'Status pomiaru HPOW', 'Wysokosc podstawy tekstowy', 'Pomiar przyrzadem 1 (niższa)', 'Pomiar przyrzadem 2 (wyższa)', 'Widzialnosc', 'Status pomiaru WID', 'Widzialnosc operatora', 'Status pomiaru WIDO','Widzialnosc automat', 'Status pomiaru WIDA', 'Zachmurzenie ogólne', 'Status pomiaru NOG','Kierunek wiatru', 'Status pomiaru KRWR', 'Prędkosc wiatru', 'Status pomiaru FWR ','Poryw wiatru ', 'Status pomiaru PORW ', 'Temperatura powietrza', 'Status pomiaru TEMP','Temperatura termometru zwilżonego', 'Status pomiaru TTZW', 'Wskaznik wentylacji','Wskaznik lodu', 'Cisnienie pary wodnej', 'Status pomiaru CPW', 'Wilgotnosc względna','Status pomiaru WLGW ', 'Temperatura punktu rosy', 'Status pomiaru TPTR', 'Cisnienie na pozimie stacji','Status pomiaru PPPS ', 'Cisnienie na pozimie morza', 'Status pomiaru PPPM', 'Charakterystyka tendencji', 'Wartosc tendencji',
+'Status pomiaru APP', 'Opad za 6 godzin', 'Status pomiaru WO6G', 'Rodzaj opadu za 6 godzin',
+'Status pomiaru ROPT', 'Pogoda biezaca', 'Pogoda ubiegla', 'Zachmurzenie niskie', 'Status pomiaru CLCM',
+'Chmury CL', 'Status pomiaru CHCL', 'Chmury CL tekstem', 'Chmury CM', 'Status pomiaru CHCM',
+'Chmury CM tekstem', 'Chmury CH [kod]', 'Status pomiaru CHCH', 'Chmury CH tekstem', 'Stan gruntu',
+'Status pomiaru SGRN', 'Niedosyt wilgotnosci', 'Status pomiaru DEFI', 'Usłonecznienie', 'Status pomiaru USLN',
+'Wystapienie rosy', 'Status pomiaru ROSW', 'Poryw maksymalny za okres WW', 'Status pomiaru PORK',
+'Godzina wystapienia porywu', 'Minuta wystapienia porywu', 'Temperatura gruntu -5', 'Status pomiaru TG05',
+'Temperatura gruntu -10', 'Status pomiaru TG10','Temperatura gruntu -20', 'Status pomiaru TG20',
+'Temperatura gruntu -50', 'Status pomiaru TG50', 'Temperatura gruntu -100', 'Status pomiaru TG100',
+'Temperatura minimalna za 12 godzin', 'Status pomiaru TMIN ', 'Temperatura maksymalna za 12 godzin', 'Status pomiaru TMAX ',
+'Temperatura minimalna przy gruncie za 12 godzin', 'Status pomiaru TGMI',
+'Równoważnik wodny sniegu', 'Status pomiaru RWSN', 'Wysokosć pokrywy snieżnej', 'Status pomiaru PKSN',
+'Wysokosć swieżo spadłego sniegu', 'Status pomiaru HSS', 'Wysokosć sniegu na poletku', 'Status pomiaru GRSN',
+'Gatunek sniegu', 'Ukształtowanie pokrywy', 'Wysokosć próbki', 'Status pomiaru HPRO',
+'Ciężar próbki', 'Status pomiaru CIPR')
+colnames(x) <- colnames
+```
+This is all about temperature so let's select the right columns and translate
+them to english.
+```{r message=FALSE}
+temp <- x %>% select('Rok', 'Miesiac', 'Dzien', 'Godzina', 'Temperatura powietrza')
+colnames(temp) <- c("year", "month", "day", "hour", "air_temp")
+```
+
+# Explore data
+## Missing values
+naniar package is nice for missing data visualisation. 
+```{r eval=FALSE, include=FALSE}
+naniar::vis_miss(temp)
+```
+And this is great as we have a complete dataset! Let's explore it further.
+## Temperature values distribution
+```{r echo=FALSE}
+temp %>% 
+  ggplot(aes(x=air_temp, fill = as.factor(year)))+
+  geom_density(alpha = .3)+
+  facet_wrap(~year)+
+  labs(fill = "year")
+```
+That's quite interesting. We see a bimodal distribution across most of the years (summer and winter? what about spring and autumn? do we still have 4 seasons?). 2012 looks like it had the most moderate temperatures as it is flat at the top. Anyway, let's split it by seasons.
+Let's assume that winter is 21-Dec - 20 Mar, spring 21-Mar - 20 Jun, summer 21-Jun - 20-Sep, Autumn 21-Sep - 20-Dec
+
+```{r fig.height=7.5, fig.width=10}
+temp_season <- temp %>%
+  mutate(
+    month = as.integer(month),
+    day = as.integer(day),
+    season = case_when(
+    month == 12 & day >= 21 ~ "winter",
+    month %in% c(1,2) ~ "winter",
+    month == 3 & day < 21~ "winter",
+    month == 3 & day >= 21 ~ "spring",
+    month %in% c(4,5) ~ "spring",
+    month == 6 & day < 21~ "spring",
+    month == 6 & day >= 21 ~ "summer",
+    month %in% c(7,8) ~ "summer",
+    month == 9 & day < 21~ "summer",
+    month == 9 & day >= 21 ~ "autumn",
+    month %in% c(10,11) ~ "autumn",
+    month == 12 & day < 21~ "autumn",
+    TRUE ~ NA_character_
+  ))
+temp_season_median <- temp_season %>% 
+  group_by(season, year) %>% 
+  summarise(median = median(air_temp))
+
+temp_season %>% 
+  ggplot(aes(x=air_temp, color = as.factor(year)))+
+  geom_density(alpha = .3)+
+  facet_wrap(~season)+
+  labs(color = "year")
+```
+It looks like summer is the most stable season. There is a lot of variation in other seasons across the years. How it will look like when we split it by year:
+```{r echo=FALSE, fig.height=7.5, fig.width=10}
+temp_season %>%
+  ggplot(aes(x=air_temp, fill = as.factor(season)))+
+  geom_density(alpha = .3)+
+  geom_vline(data = temp_season_median,
+             aes(xintercept = median),
+             color = 'red')+
+  facet_grid(year~season, scales = "free_x")+
+  labs(fill = "year")
+```
+Red vertical line inticates the median values per season of each year. It's difficult to see the trend on this. Lets try another way:
+```{r echo=FALSE}
+temp_season_median %>% 
+  ggplot(aes(x=year, y = median, color = season))+
+  geom_jitter(shape = 21)+
+  geom_smooth(method = "lm")
+```
+Yep, the median temperature of all the seasons generally increases in time. Here is the plot with full data for reference:
+```{r echo=FALSE}
+temp_season %>% 
+  ggplot(aes(x=year, y = air_temp, color = season))+
+  geom_jitter(shape = 21, alpha = .1)+
+  geom_smooth(method = "lm")+
+  theme_light()
+```
+The way to check which season temperature is increasing faster is to compare betas (slopes angle) of linear model. Here are the betas for each season:
+```{r echo=FALSE, fig.height=3.5, fig.width=5}
+seasons <- sort(unique(temp_season$season))
+trends <- c()
+for(s in seq_along(seasons)){
+  #print(seasons[s])
+  x <- temp_season %>%
+    filter(season == seasons[s])
+  #print(head(x))
+  mod_lm <- lm(air_temp ~ year, data = x)
+  #print(summary(mod_lm))
+  #print('###########################')
+
+  slope <- mod_lm$coefficients[which(names(mod_lm$coefficients) == "year")]
+  #print(slope)
+  trends[s] <- slope
+}
+#trends
+temp_season %>%
+  select(season) %>%
+  distinct() %>%
+  arrange(season) %>% 
+  mutate(trend = trends) %>% 
+  arrange(desc(trends)) %>%
+  mutate(season = factor(season, ordered = TRUE, levels = season)) %>%
+  ggplot(aes(x = season, y = trend))+
+  geom_col(color = "black")+
+  labs(title = "Values of slopes betas of fitted linear model",
+       subtitle = "The trend of median temperatures imcrement of winter and \nspring is the highest, while autumn is the lowest")
+
+```

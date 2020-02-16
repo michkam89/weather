@@ -1,0 +1,2 @@
+"0","temp <- x %>% select('Rok', 'Miesiac', 'Dzien', 'Godzina', 'Temperatura powietrza')"
+"0","colnames(temp) <- c(""year"", ""month"", ""day"", ""hour"", ""air_temp"")"

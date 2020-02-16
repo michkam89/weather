@@ -1,0 +1,8 @@
+"0","temp_season %>%"
+"0","  ggplot(aes(x=air_temp, fill = as.factor(season)))+"
+"0","  geom_density(alpha = .3)+"
+"0","  geom_vline(data = temp_season_median,"
+"0","             aes(xintercept = median),"
+"0","             color = 'red')+"
+"0","  facet_grid(year~season, scales = ""free_x"")+"
+"0","  labs(fill = ""year"")"
