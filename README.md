@@ -1,6 +1,8 @@
 # weather
 Exploratory analysis of weather data for Warsaw, Poland through years 2004-2019.
+
 Source: https://dane.imgw.pl/
+
 I will try to post my analyses regularly. You may expect some notebook soon.
 
 Here is the list of current analyses:
