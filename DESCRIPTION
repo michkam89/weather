@@ -1,0 +1,13 @@
+Package: weather
+Title: This is a package that is used for weather data analysis
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Michal",
+           family = "Kaminski",
+           role = c("aut", "cre"),
+           email = "michkam89@gmail.com",
+           comment = structure("YOUR-ORCID-ID", .Names = "ORCID"))
+Description: Created as a repository of markdown documentation of the project
+License: MIT
+Encoding: UTF-8
+LazyData: true
