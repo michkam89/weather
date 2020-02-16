@@ -19,7 +19,7 @@ library(ggplot2)
 # Load data
 
 Data was downloaded manually from <https://dane.imgw.pl/> and I stored them in 
-'data-raw' folder.
+'data-raw' folder. Here are the dimensions of obtained data frame:
 
 ```{r message=FALSE}
 # specify location
@@ -34,7 +34,7 @@ do.call_rbind_fread <- function(path, pattern = "*.csv") {
 x <- do.call_rbind_fread(path)
 dim(x)
 ```
-The dataset contained over 140000 rows and 107 columns. Unfortunately tables did not contain column names, so I needed to enter them manually ( I will skip that ugly part).
+The data set contained over 140000 rows and 107 columns. Unfortunately tables did not contain column names, so I needed to enter them manually ( I will skip that ugly part).
 ```{r message=FALSE, include=FALSE}
 colnames <- c('Kod stacji','Nazwa stacji', 'Rok', 'Miesiac', 'Dzien', 'Godzina', 'Wysokosc podstawy chmur CL CM szyfrowana','Status pomiaru HPOD', 'Wysokosc podstawy nizszej', 'Status pomiaru HPON', 'Wysokosc podstawy wyzszej', 'Status pomiaru HPOW', 'Wysokosc podstawy tekstowy', 'Pomiar przyrzadem 1 (niższa)', 'Pomiar przyrzadem 2 (wyższa)', 'Widzialnosc', 'Status pomiaru WID', 'Widzialnosc operatora', 'Status pomiaru WIDO','Widzialnosc automat', 'Status pomiaru WIDA', 'Zachmurzenie ogólne', 'Status pomiaru NOG','Kierunek wiatru', 'Status pomiaru KRWR', 'Prędkosc wiatru', 'Status pomiaru FWR ','Poryw wiatru ', 'Status pomiaru PORW ', 'Temperatura powietrza', 'Status pomiaru TEMP','Temperatura termometru zwilżonego', 'Status pomiaru TTZW', 'Wskaznik wentylacji','Wskaznik lodu', 'Cisnienie pary wodnej', 'Status pomiaru CPW', 'Wilgotnosc względna','Status pomiaru WLGW ', 'Temperatura punktu rosy', 'Status pomiaru TPTR', 'Cisnienie na pozimie stacji','Status pomiaru PPPS ', 'Cisnienie na pozimie morza', 'Status pomiaru PPPM', 'Charakterystyka tendencji', 'Wartosc tendencji',
 'Status pomiaru APP', 'Opad za 6 godzin', 'Status pomiaru WO6G', 'Rodzaj opadu za 6 godzin',
@@ -55,7 +55,7 @@ colnames <- c('Kod stacji','Nazwa stacji', 'Rok', 'Miesiac', 'Dzien', 'Godzina',
 colnames(x) <- colnames
 ```
 This is all about temperature so let's select the right columns and translate
-them to english.
+them to English.
 ```{r message=FALSE}
 temp <- x %>% select('Rok', 'Miesiac', 'Dzien', 'Godzina', 'Temperatura powietrza')
 colnames(temp) <- c("year", "month", "day", "hour", "air_temp")
@@ -63,21 +63,23 @@ colnames(temp) <- c("year", "month", "day", "hour", "air_temp")
 
 # Explore data
 ## Missing values
-naniar package is nice for missing data visualisation. 
-```{r eval=FALSE, include=FALSE}
+naniar package is nice for missing data visualization. 
+```{r echo=FALSE, fig.height=3.5, fig.width=5, eval=TRUE}
 naniar::vis_miss(temp)
 ```
-And this is great as we have a complete dataset! Let's explore it further.
+And this is great as we have a complete data set! Let's explore it further.
+
 ## Temperature values distribution
 ```{r echo=FALSE}
 temp %>% 
   ggplot(aes(x=air_temp, fill = as.factor(year)))+
   geom_density(alpha = .3)+
   facet_wrap(~year)+
-  labs(fill = "year")
+  labs(fill = "year")+
+  theme_light()
 ```
 That's quite interesting. We see a bimodal distribution across most of the years (summer and winter? what about spring and autumn? do we still have 4 seasons?). 2012 looks like it had the most moderate temperatures as it is flat at the top. Anyway, let's split it by seasons.
-Let's assume that winter is 21-Dec - 20 Mar, spring 21-Mar - 20 Jun, summer 21-Jun - 20-Sep, Autumn 21-Sep - 20-Dec
+Let's assume that winter is 21-Dec - 20 Mar, spring 21-Mar - 20 Jun, summer 21-Jun - 20-Sept, Autumn 21-Sept - 20-Dec
 
 ```{r fig.height=7.5, fig.width=10}
 temp_season <- temp %>%
@@ -107,7 +109,8 @@ temp_season %>%
   ggplot(aes(x=air_temp, color = as.factor(year)))+
   geom_density(alpha = .3)+
   facet_wrap(~season)+
-  labs(color = "year")
+  labs(color = "year")+
+  theme_light()
 ```
 It looks like summer is the most stable season. There is a lot of variation in other seasons across the years. How it will look like when we split it by year:
 ```{r echo=FALSE, fig.height=7.5, fig.width=10}
@@ -118,16 +121,23 @@ temp_season %>%
              aes(xintercept = median),
              color = 'red')+
   facet_grid(year~season, scales = "free_x")+
-  labs(fill = "year")
+  labs(fill = "year")+
+  theme_light()
 ```
-Red vertical line inticates the median values per season of each year. It's difficult to see the trend on this. Lets try another way:
+Red vertical line indicates the median values per season of each year. 
+
+## Trend analysis (seasons)
+
+It's difficult to see the trend on the charts above. Let's plot median values for each season each year:
 ```{r echo=FALSE}
 temp_season_median %>% 
   ggplot(aes(x=year, y = median, color = season))+
   geom_jitter(shape = 21)+
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm")+
+  labs(y = "median air_temp")+
+  theme_light()
 ```
-Yep, the median temperature of all the seasons generally increases in time. Here is the plot with full data for reference:
+Yep, the median temperature of all the seasons generally increases in time. Here is the plot with all data points for reference:
 ```{r echo=FALSE}
 temp_season %>% 
   ggplot(aes(x=year, y = air_temp, color = season))+
@@ -135,6 +145,9 @@ temp_season %>%
   geom_smooth(method = "lm")+
   theme_light()
 ```
+
+## Compare trends (seasons)
+
 The way to check which season temperature is increasing faster is to compare betas (slopes angle) of linear model. Here are the betas for each season:
 ```{r echo=FALSE, fig.height=3.5, fig.width=5}
 seasons <- sort(unique(temp_season$season))
@@ -162,7 +175,8 @@ temp_season %>%
   mutate(season = factor(season, ordered = TRUE, levels = season)) %>%
   ggplot(aes(x = season, y = trend))+
   geom_col(color = "black")+
-  labs(title = "Values of slopes betas of fitted linear model",
-       subtitle = "The trend of median temperatures imcrement of winter and \nspring is the highest, while autumn is the lowest")
+  labs(title = "Values of slopes betas of fitted linear model per season",
+       subtitle = "The trend of temperatures increment of winter and \nspring is the highest, while autumn is the lowest")+
+  theme_light()
 
 ```

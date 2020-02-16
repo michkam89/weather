@@ -1,4 +1,0 @@
-"0","temp_season_median %>% "
-"0","  ggplot(aes(x=year, y = median, color = season))+"
-"0","  geom_jitter(shape = 21)+"
-"0","  geom_smooth(method = ""lm"")"

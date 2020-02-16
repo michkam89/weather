@@ -1,69 +1,0 @@
-[0m[0KMicrosoft Windows [Wersja 6.1.7601][0K[?25l
-Copyright (c) 2009 Microsoft Corporation. Wszelkie prawa zastrzeżone.[0K
-[0K
-g[0Ki[0Kt[0K[30G[?25lF:\programowanie\weather>git s[0K[?25ha[0Kt[0K[?25lF:\programowanie\weather>git sa[0K[?25h[?25lF:\programowanie\weather>git s[0K[?25ht[0Ka[0Kt[0Ku[0Ks[0K]0;  - git  status[?25l
-[0K[?25hOn branch master[0K[?25l
-Your branch is ahead of 'origin/master' by 2 commits.[0K
-  (use "git push" to publish your local commits)[0K
-[0K
-Changes to be committed:[0K
-  (use "git restore --staged <file>..." to unstage)[0K
-        [0;32mnew file:   .Rbuildignore[0m[0K
-        [0;32mnew file:   .Rproj.user/54369756/console06/E3F3741C[0m[0K
-        [0;32mnew file:   .Rproj.user/54369756/console06/INDEX001[0m[0K
-        [0;32mnew file:   .Rproj.user/54369756/sources/prop/197742B9[0m[0K
-        [0;32mnew file:   .Rproj.user/54369756/sources/prop/24CCBAC1[0m[0K
-        [0;32mnew file:   .Rproj.user/54369756/sources/prop/9E3ADBFB[0m[0K
-        [0;32mnew file:   .Rproj.user/54369756/sources/prop/INDEX[0m[0K
-        [0;32mnew file:   .Rproj.user/54369756/sources/s-B6281C94/134B70EC-contents[0m[0K
-        [0;32mnew file:   .Rproj.user/54369756/sources/s-B6281C94/43AE0BB4-contents[0m[0K
-        [0;32mnew file:   .Rproj.user/54369756/sources/s-B6281C94/BC8B38BD[0m[0K
-        [0;32mnew file:   .Rproj.user/54369756/sources/s-B6281C94/BC8B38BD-contents[0m[0K
-        [0;32mnew file:   .Rproj.user/54369756/sources/s-B6281C94/lock_file[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/54369756B6281C94/chunks.json[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/c1z3c4a5uhdhq/000002.csv[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/c1z3c4a5uhdhq/000003.metadata[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/c1z3c4a5uhdhq/000003.png[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/c32a2bi9zeor7/000002.csv[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/c337h5v9m53ue/000009.metadata[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/c337h5v9m53ue/000009.png[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/c6x8ilan19wec/000002.csv[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/c6x8ilan19wec/000003.metadata[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/c6x8ilan19wec/000003.png[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/cb5mg0jvbj1s9/000002.csv[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/cgxtet9nkmrml/000002.csv[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/cgxtet9nkmrml/000003.metadata[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/cgxtet9nkmrml/000003.png[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/chunks.json[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/ck1x0pzrp638y/000002.csv[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/ck1x0pzrp638y/000003.metadata[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/ck1x0pzrp638y/000003.png[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/cm0i04eo9ds6s/000002.csv[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/cmneoweyi7uo9/000008.csv[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/cmneoweyi7uo9/000009.metadata[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/cmneoweyi7uo9/000009.png[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/csetup_chunk/000002.csv[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/s/cyhham8x1ki73/000002.csv[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/patch-chunk-names[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/paths[0m[0K
-        [0;32mnew file:   temp_waw_eda.Rmd[0m[0K
-        [0;32mmodified:   temp_waw_eda.md[0m[0K[?25h]0; [?25l
-        [0;32mmodified:   temp_waw_eda_files/figure-markdown_github/unnamed-chunk-10-1.png[0m[0K
-        [0;32mnew file:   temp_waw_eda_files/figure-markdown_github/unnamed-chunk-11-1.png[0m[0K
-        [0;32mmodified:   temp_waw_eda_files/figure-markdown_github/unnamed-chunk-6-1.png[0m[0K
-        [0;32mmodified:   temp_waw_eda_files/figure-markdown_github/unnamed-chunk-9-1.png[0m[0K
-[0K
-Changes not staged for commit:[0K
-  (use "git add <file>..." to update what will be committed)[0K
-  (use "git restore <file>..." to discard changes in working directory)[0K
-        [0;31mmodified:   .Rproj.user/54369756/console06/E3F3741C[0m[0K
-        [0;31mmodified:   .Rproj.user/54369756/console06/INDEX001[0m[0K
-        [0;31mmodified:   .Rproj.user/54369756/sources/prop/9E3ADBFB[0m[0K
-        [0;31mmodified:   .Rproj.user/54369756/sources/prop/INDEX[0m[0K
-        [0;31mmodified:   .Rproj.user/54369756/sources/s-B6281C94/BC8B38BD[0m[0K
-        [0;31mmodified:   .Rproj.user/shared/notebooks/646C78D7-temp_waw_eda/1/54369756B6281C94/chunks.json[0m[0K
-        [0;31mmodified:   .gitignore[0m[0K
-[0K
-[0K
-F:\programowanie\weather>[0K[?25hg[0Ki[0Kt[0K[30G[?25lF:\programowanie\weather>git r[0K[?25hm[0K[33G[?25lF:\programowanie\weather>git rm .[0K[?25hR[0Kp[0Kroj.user[0K/[0K.git[0K[?25lF:\programowanie\weather>git rm .Rproj.user/.gi[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/.g[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/.[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/[0K[?25hs[0Kh[0Ka[0Kr[0Ke[0Kd[0K[?25lF:\programowanie\weather>git rm .Rproj.user/share[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/shar[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/sha[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/sh[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/s[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/[0K[?25h/[0Ks[0Kh[0Ka[0Kr[0Ke[0Kd[0K/[0Kn[0Ko[0Kt[0Ke[0Kb[0Ko[0Ko[0K[?25lF:\programowanie\weather>git rm .Rproj.user//shared/notebo[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//shared/noteb[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//shared/note[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//shared/not[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//shared/no[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//shared/n[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//shared/[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//shared[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//share[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//shar[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//sha[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//sh[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//s[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user//[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/[0K[?25hs[0Kh[0Ka[0Kr[0Ke[0Kd[0K/[0Kn[0Ko[0Kt[0Ke[0Kb[0Ko[0Ko[0Kk[0Ks[0K[?25lF:\programowanie\weather>git rm .Rproj.user/shared/notebook[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/shared/noteboo[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/shared/notebo[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/shared/noteb[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/shared/note[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/shared/not[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/shared/no[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/shared/n[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/shared/[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/share[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/sh[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/s[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user/[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.user[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.us[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj.[0K[?25h[?25lF:\programowanie\weather>git rm .Rproj[0K[?25h[?25lF:\programowanie\weather>git rm .Rpro[0K[?25h[?25lF:\programowanie\weather>git rm .Rp[0K[?25h[?25lF:\programowanie\weather>git rm .R[0K[?25h[?25lF:\programowanie\weather>git rm .[0K[?25h[?25lF:\programowanie\weather>git rm[0K[?25h[?25lF:\programowanie\weather>git r[0K[?25h[?25lF:\programowanie\weather>git[0K[30G[?25h[29G[?25lF:\programowanie\weather>g[0K[?25h[?25lF:\programowanie\weather>[0K[?25hg[0Ki[0Kt[0K[30G[?25lF:\programowanie\weather>git a[0K[?25hd[0Kd[0K[34G[?25lF:\programowanie\weather>git add -[0K[?25h-[0Ka[0Kl[0Kl[0K]0;  - git  add --all[?25l
-[0K[?25h
