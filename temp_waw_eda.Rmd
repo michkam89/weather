@@ -141,25 +141,28 @@ temp_season_median %>%
 Yep, the median temperature of all the seasons generally increases in time. Here is the plot with all data points for reference and a boxplot:
 ```{r echo=FALSE, fig.height=6.5, fig.width=11, fig.align="left"}
 p1 <- temp_season %>% 
-  ggplot(aes(x=year, y = air_temp, color = season))+
-  geom_jitter(shape = 21, alpha = .1)+
-  geom_smooth(method = "lm")+
-  theme_light()
+  ggplot(aes(x=year, y = air_temp, fill = season))+
+  geom_jitter(shape = 21, alpha = .1, color = "black")+
+  geom_smooth(aes(color = season), method = "lm")+
+  theme_light()+
+  guides(fill = guide_legend(ncol = 2))
 
 p2 <- temp_season %>% 
   ggplot(aes(x=as.factor(season), y = air_temp))+
   geom_boxplot(aes(fill = as.factor(year)), outlier.shape = 21, outlier.alpha = .1)+
   theme_light()+
-  facet_wrap(~season, scales = "free")+
-  labs(y = "air_temp", x = "season", fill = "year")
+  #facet_wrap(~season, ncol = 4)+
+  labs(y = "air_temp", x = "season", fill = "year")+
+  theme(legend.position = "right")+
+  guides(fill = guide_legend(ncol = 2))
 
-weather::multiplot(p1, p2, cols=2)
+weather::multiplot(p1, p2, cols=1)
 ```
 
 ## Compare trends (seasons)
 
-The way to check which season temperature is increasing faster is to compare betas (slopes angle) of linear model. Here are the betas for each season:
-```{r echo=FALSE, fig.height=3.5, fig.width=5}
+The way to check which season temperature is increasing faster is to compare betas (slope angle) of linear model. Here are the betas for each season:
+```{r echo=FALSE, fig.height=3.5, fig.width=5, message=FALSE}
 seasons <- sort(unique(temp_season$season))
 trends <- c()
 for(s in seq_along(seasons)){
@@ -185,8 +188,9 @@ temp_season %>%
   mutate(season = factor(season, ordered = TRUE, levels = season)) %>%
   ggplot(aes(x = season, y = trend))+
   geom_col(color = "black")+
-  labs(title = "Values of slopes betas of fitted linear model per season",
-       subtitle = "The trend of temperatures increment of winter and \nspring is the highest, while autumn is the lowest")+
+  geom_text(aes(y = trend + 0.01, label = round(trend, 3)))+
+  labs(title = "Values of betas of fitted linear model per season")+
   theme_light()
 
 ```
+Winter and spring are warming at the fastest pace. Around 0.16 and 0.15 degrees of Celcius per year. Autumn is the most stable but still warming.

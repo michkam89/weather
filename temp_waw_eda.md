@@ -41,4 +41,4 @@ It's difficult to see the trend on the charts above. Let's plot median values fo
 Compare trends (seasons)
 ------------------------
 
-The way to check which season temperature is increasing faster is to compare betas (slopes angle) of linear model. Here are the betas for each season: <img src="temp_waw_eda_files/figure-markdown_github/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+The way to check which season temperature is increasing faster is to compare betas (slope angle) of linear model. Here are the betas for each season: <img src="temp_waw_eda_files/figure-markdown_github/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /> Winter and spring are warming at the fastest pace. Around 0.16 and 0.15 degrees of Celcius per year. Autumn is the most stable but still warming.
