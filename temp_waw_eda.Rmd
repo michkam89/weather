@@ -88,20 +88,21 @@ temp_season <- temp %>%
     month = as.integer(month),
     day = as.integer(day),
     season = case_when(
-    month == 12 & day >= 21 ~ "winter",
-    month %in% c(1,2) ~ "winter",
-    month == 3 & day < 21~ "winter",
-    month == 3 & day >= 21 ~ "spring",
-    month %in% c(4,5) ~ "spring",
-    month == 6 & day < 21~ "spring",
-    month == 6 & day >= 21 ~ "summer",
-    month %in% c(7,8) ~ "summer",
-    month == 9 & day < 21~ "summer",
-    month == 9 & day >= 21 ~ "autumn",
-    month %in% c(10,11) ~ "autumn",
-    month == 12 & day < 21~ "autumn",
-    TRUE ~ NA_character_
-  ))
+      month == 12 & day >= 21 ~ "winter",
+      month %in% c(1,2) ~ "winter",
+      month == 3 & day < 21~ "winter",
+      month == 3 & day >= 21 ~ "spring",
+      month %in% c(4,5) ~ "spring",
+      month == 6 & day < 21~ "spring",
+      month == 6 & day >= 21 ~ "summer",
+      month %in% c(7,8) ~ "summer",
+      month == 9 & day < 21~ "summer",
+      month == 9 & day >= 21 ~ "autumn",
+      month %in% c(10,11) ~ "autumn",
+      month == 12 & day < 21~ "autumn",
+      TRUE ~ NA_character_),
+    season = factor(season, ordered = TRUE, levels = c("spring", "summer", "autumn", "winter"))
+    )
 temp_season_median <- temp_season %>% 
   group_by(season, year) %>% 
   summarise(median = median(air_temp))
