@@ -109,8 +109,8 @@ temp_season_median <- temp_season %>%
 
 temp_season %>% 
   ggplot(aes(x=air_temp, color = as.factor(year)))+
-  geom_density(alpha = .3)+
-  facet_wrap(~season)+
+  geom_density()+
+  facet_wrap(~season, ncol = 1)+
   labs(color = "year")+
   theme_light()
 ```
