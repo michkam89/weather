@@ -195,3 +195,43 @@ temp_season %>%
 
 ```
 Winter and spring are warming at the fastest pace. Around 0.16 and 0.15 degrees of Celcius per year. Autumn is the most stable but still warming.
+
+## By months
+
+Let's check how it looks like when we look at the data splitted by months. For me it was quite surprising that during winter months sometimes overlap with temperatures in June, July or August. Maybe those low tempereatures in summere were temperatures during nights?
+
+```{r, by month }
+temp_season %>% 
+  ggplot(aes(x=month, y=air_temp)) +
+  geom_jitter(aes(fill=season), shape=21, color = "black", alpha=.6)+
+  geom_smooth(color = "darkred")+
+  theme_light()
+```
+
+```{r, by month }
+temp_daytime <- temp_season %>% 
+  mutate(
+    day_time = case_when(
+      hour %in% c(6:12) ~ "morning",
+      hour %in% c(13:21) ~ "afternoon",
+      TRUE ~ "night"),
+    day_time = as.factor(day_time)
+  ) 
+temp_daytime %>% 
+  filter(season %in% c("summer", "winter")) %>% 
+  ggplot(aes(x=as.factor(month), y=air_temp)) +
+  geom_jitter(aes(fill=day_time), shape=21, color = "black", alpha=.6)+
+  geom_smooth(color = "darkred")+
+  theme_light()
+```
+
+```{r}
+temp_daytime %>% 
+  filter(season %in% c("summer", "winter")) %>% 
+  ggplot(aes(x=as.factor(day_time), y=air_temp)) +
+  geom_jitter(aes(fill=season), shape=21, color = "black", alpha=.6)+
+  geom_smooth(color = "darkred")+
+  geom_hline(yintercept = max(temp_daytime$air_temp[which(temp_daytime$season == "winter")]))+
+  geom_hline(yintercept = min(temp_daytime$air_temp[which(temp_daytime$season == "summer")]))+
+  theme_light()
+```
